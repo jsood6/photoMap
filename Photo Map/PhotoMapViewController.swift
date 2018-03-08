@@ -9,7 +9,8 @@
 import UIKit
 import MapKit
 
-class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, LocationsViewControllerDelegate  {
+    
 
     var capturedImage:UIImage!
     
@@ -67,7 +68,9 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     
-    
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
+        self.navigationController?.popToViewController(self, animated: true)
+    }
 
     
     // MARK: - Navigation
@@ -75,6 +78,8 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
+        let photoMap = segue.destination as! LocationsViewController
+        photoMap.delegate = self 
         // Pass the selected object to the new view controller.
     }
     
