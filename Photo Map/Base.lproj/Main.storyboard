@@ -22,13 +22,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="S9l-7s-GSC">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="S9l-7s-GSC">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cj7-ap-sMB">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cj7-ap-sMB">
                                 <rect key="frame" x="102" y="461" width="116" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="camera"/>
                                 <connections>
                                     <action selector="cameraButtonTapped:" destination="ghP-Ww-KKQ" eventType="touchUpInside" id="klN-WI-bl6"/>
@@ -36,6 +34,15 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="S9l-7s-GSC" secondAttribute="trailing" id="0nS-AR-lZt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Cj7-ap-sMB" secondAttribute="trailing" constant="86" id="FrI-DI-EdV"/>
+                            <constraint firstItem="S9l-7s-GSC" firstAttribute="top" secondItem="Lxe-6f-KEH" secondAttribute="top" id="OG4-tT-SCd"/>
+                            <constraint firstItem="ufw-e1-uLx" firstAttribute="top" secondItem="Cj7-ap-sMB" secondAttribute="bottom" constant="43" id="SNj-Hi-9xX"/>
+                            <constraint firstItem="ufw-e1-uLx" firstAttribute="top" secondItem="S9l-7s-GSC" secondAttribute="bottom" id="b0p-Hk-hVQ"/>
+                            <constraint firstItem="Cj7-ap-sMB" firstAttribute="leading" secondItem="Lxe-6f-KEH" secondAttribute="leadingMargin" constant="86" id="loY-5Y-zz7"/>
+                            <constraint firstItem="S9l-7s-GSC" firstAttribute="leading" secondItem="Lxe-6f-KEH" secondAttribute="leading" id="z9M-g2-m6x"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aPF-0T-Ydb"/>
                     <connections>
@@ -89,7 +96,7 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="61" id="8nY-cI-ARj" customClass="LocationCell" customModule="Photo_Map" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="61" id="8nY-cI-ARj" customClass="LocationCell" customModule="Photo_Map" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="66" width="320" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8nY-cI-ARj" id="kg8-aL-hL3">

@@ -25,6 +25,7 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var searchBar: UISearchBar!
 
     var results: NSArray = []
+    var capturedImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,42 +33,11 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
-        
+        fetchLocations("San Diego")
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell") as! LocationCell
-        
-        cell.location = results[(indexPath as NSIndexPath).row] as! NSDictionary
-        
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // This is the selected venue
-        let venue = results[(indexPath as NSIndexPath).row] as! NSDictionary
-
-        let lat = venue.value(forKeyPath: "location.lat") as! NSNumber
-        let lng = venue.value(forKeyPath: "location.lng") as! NSNumber
-
-        let latString = "\(lat)"
-        let lngString = "\(lng)"
-
-        print(latString + " " + lngString)
-        
-        delegate?.locationsPickedLocation(controller: self,latitude: lat, longitude: lng )
-    }
-    
+   
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newText = NSString(string: searchBar.text!).replacingCharacters(in: range, with: text)
         fetchLocations(newText)
@@ -85,7 +55,9 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
 
         let url = URL(string: baseUrlString + queryString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!
         let request = URLRequest(url: url)
-
+        
+        print("URL", url)
+        
         let session = URLSession(
             configuration: URLSessionConfiguration.default,
             delegate:nil,
@@ -107,4 +79,36 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         task.resume()
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return results.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell") as! LocationCell
+        
+        cell.location = results[(indexPath as NSIndexPath).row] as! NSDictionary
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // This is the selected venue
+        let venue = results[(indexPath as NSIndexPath).row] as! NSDictionary
+        
+        let lat = venue.value(forKeyPath: "location.lat") as! NSNumber
+        let lng = venue.value(forKeyPath: "location.lng") as! NSNumber
+        
+        let latString = "\(lat)"
+        let lngString = "\(lng)"
+        
+        print(latString + " " + lngString)
+        
+        delegate?.locationsPickedLocation(controller: self,latitude: lat, longitude: lng )
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
 }
